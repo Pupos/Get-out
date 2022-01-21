@@ -1,0 +1,22 @@
+{
+    "name": "Ships",
+    "short_name": "Game",
+    "theme_color": "black",
+    "background_color": "white",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "https://colorhexxx.website/",
+    "description": "Choose the color!",
+    "orientation": "any",
+    "icons": [
+        {
+            "src": "https://cdn.glitch.com/79cfca1a-85b1-4b18-a6df-92b01b6ea33b%2Ficon-512x512.png?v=1632764563434",
+            "sizes": "512x512"
+        },
+    {"src":"https://cdn.glitch.com/79cfca1a-85b1-4b18-a6df-92b01b6ea33b%2Ficon-192x192.png?v=1632764554135",
+      "sizes":"192x192"},
+  {"src":"https://cdn.glitch.com/79cfca1a-85b1-4b18-a6df-92b01b6ea33b%2Ficon-256x256.png?v=1632764557446",
+  "sizes":"256x256"},
+  {"src":"https://cdn.glitch.com/79cfca1a-85b1-4b18-a6df-92b01b6ea33b%2Ficon-384x384.png?v=1632764560124",
+  "sizes":"384x384"}]
+}

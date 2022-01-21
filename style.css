@@ -1,30 +1,753 @@
-body{
-  font-family: helvetica, arial, sans-serif;
-  margin: 2em;
+.hidden {
+  display: none;
 }
-h1{
-  font-size:italic;
-  color:black;
+
+.unhidden {
+  display: block;
 }
-#map{
-  height:700px;
-  width:100%;
-  border:thin solid black;
+#put {
+  background-color: #bbaacc;
+  width: 100px;
+  height: 30px;
 }
-.custom-map-control-button{
-  appearance: button;
-  background-color:#fff;
-  border:0;
-  border-rediius:2px;
-  box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
-  cursor:pointer;
-  margin:10px;
-  padding:0 0.5em;
-  height:40px;
-  font: 400 18px Roboto, Arial, sans-serif;
-  overflow: hidden;
-  
+#positionMessage {
+  position: absolute;
+  top: 45px;
+  left: 0px;
+  width: 100%;
 }
-.custom-map-control-button:hover{
-  background:#ebebeb;
+
+#boundaryMessage {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 600px;
+  height: 200px;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 1;
+  padding: 30px;
+  border: thick solid #6495ed;
+}
+#lightbox {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+#error {
+  visibility: hidden;
+  font-size: 30px;
+  width: 100vw;
+  text-align: center;
+}
+#unput {
+  background-color: #eeddcc;
+  width: 100px;
+  height: 30px;
+}
+body {
+  background-color: #6688ff;
+}
+
+.figure {
+  width: 100px;
+  height: 57.735px;
+  background-color: #aaaaee;
+  position: relative;
+  text-align: center;
+  font-size: 15px;
+  color: #aaaaee;
+}
+.figure::before {
+  content: "";
+  position: absolute;
+  top: -28.8675px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 28.8675px solid;
+}
+.figure::after {
+  content: "";
+  position: absolute;
+  bottom: -28.8675px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-top: 28.8675px solid;
+}
+
+.ships {
+  position: absolute;
+  left: -1000px;
+  top: 0px;
+  z-index: 1;
+  border-radius: 12px;
+  border: solid;
+  border-width: 5px;
+  border-color: #333333;
+}
+#stick {
+  width: 20px;
+  height: 250px;
+  background-color: grey;
+  position: absolute;
+  z-index: 1;
+  transform: rotate(90deg);
+  border-radius: 12px;
+  border: solid;
+  border-width: 5px;
+  border-color: #333333;
+  top: -100px;
+  left: 600px;
+  pointer-events: none;
+}
+#smallStick {
+  width: 25px;
+  height: 150px;
+  background-color: grey;
+  border: 4px black solid;
+  border-radius: 12px;
+  pointer-events: none;
+}
+#longStick {
+  transform: rotate(90deg);
+
+  width: 25px;
+  height: 350px;
+  background-color: grey;
+  border: 4px black solid;
+  border-radius: 12px;
+  pointer-events: none;
+}
+#aviaShip {
+  transform: rotate(0deg);
+  height: 0;
+  width: 140px;
+  border-bottom: 100px solid grey;
+  border-left: 45px solid transparent;
+  border-right: 45px solid transparent;
+  border-top: 10px solid transparent;
+  border-radius: 8px;
+  pointer-events: none;
+}
+#tripleShip {
+  transform: rotate(45deg);
+  pointer-events: none;
+
+  --side-size: 70px;
+  border-left: var(--side-size) solid transparent;
+  border-right: var(--side-size) solid transparent;
+  border-bottom: calc(2 * var(--side-size) * 0.866) solid grey;
+  border-top: var(--side-size) solid transparent;
+  display: inline-block;
+  border-radius: 12px;
+}
+
+#stick2 {
+  width: 20px;
+  height: 250px;
+  background-color: grey;
+  position: absolute;
+  z-index: 1;
+  transform: rotate(90deg);
+  border-radius: 12px;
+  border: solid;
+  border-width: 5px;
+  border-color: #333333;
+  top: -100px;
+  left: 600px;
+  pointer-events: none;
+}
+#smallStick2 {
+  width: 25px;
+  height: 150px;
+  background-color: grey;
+  border: 4px black solid;
+  border-radius: 12px;
+  pointer-events: none;
+}
+#longStick2 {
+  transform: rotate(90deg);
+
+  width: 25px;
+  height: 350px;
+  background-color: grey;
+  border: 4px black solid;
+  border-radius: 12px;
+  pointer-events: none;
+}
+#aviaShip2 {
+  transform: rotate(0deg);
+  height: 0;
+  width: 140px;
+  border-bottom: 100px solid grey;
+  border-left: 45px solid transparent;
+  border-right: 45px solid transparent;
+  border-top: 10px solid transparent;
+  border-radius: 8px;
+  pointer-events: none;
+}
+#tripleShip2 {
+  transform: rotate(45deg);
+  pointer-events: none;
+
+  --side-size: 70px;
+  border-left: var(--side-size) solid transparent;
+  border-right: var(--side-size) solid transparent;
+  border-bottom: calc(2 * var(--side-size) * 0.866) solid grey;
+  border-top: var(--side-size) solid transparent;
+  display: inline-block;
+  border-radius: 12px;
+}
+#putStick {
+  width: 200px;
+  height: 100px;
+  background-color: grey;
+  border-radius: 25px;
+}
+#putStick > div {
+  width: 10px;
+  height: 120px;
+  background-color: #555555;
+  position: relative;
+  z-index: 3;
+  transform: rotate(90deg);
+  border-radius: 12px;
+  border: solid;
+  border-width: 5px;
+  border-color: #333333;
+  top: 0px;
+  left: 80px;
+
+  pointer-events: none;
+}
+#putLong > div {
+  width: 10px;
+  height: 180px;
+  background-color: #555555;
+  position: relative;
+  z-index: 3;
+  transform: rotate(90deg);
+  border-radius: 12px;
+  border: solid;
+  border-width: 5px;
+  border-color: #333333;
+  top: -40px;
+  left: 80px;
+
+  pointer-events: none;
+}
+#putTriple > div {
+  position: relative;
+  left: 0px;
+  top: -10px;
+  transform: rotate(60deg);
+  pointer-events: none;
+
+  --side-size: 35px;
+  border-left: var(--side-size) solid transparent;
+  border-right: var(--side-size) solid transparent;
+  border-bottom: calc(2 * var(--side-size) * 0.866) solid black;
+  border-top: var(--side-size) solid transparent;
+  display: inline-block;
+  border-radius: 12px;
+
+  pointer-events: none;
+}
+#putAvia > div {
+  transform: rotate(0deg);
+  position: relative;
+
+  height: 0;
+  width: 70px;
+  border-bottom: 50px solid black;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-top: 10px solid transparent;
+  border-radius: 8px;
+  pointer-events: none;
+  left: 35px;
+}
+#putShort > div {
+  width: 10px;
+  height: 70px;
+  background-color: #555555;
+  position: relative;
+  z-index: 3;
+  transform: rotate(90deg);
+  border-radius: 12px;
+  border: solid;
+  border-width: 5px;
+  border-color: #333333;
+  top: 20px;
+  left: 80px;
+
+  pointer-events: none;
+}
+#putAvia {
+  width: 200px;
+  height: 100px;
+  background-color: grey;
+  border-radius: 25px;
+}
+#putTriple {
+  width: 200px;
+  height: 100px;
+  background-color: grey;
+  border-radius: 25px;
+}
+#putLong {
+  width: 200px;
+  height: 100px;
+  background-color: grey;
+  border-radius: 25px;
+}
+#putShort {
+  width: 200px;
+  height: 100px;
+  background-color: grey;
+  border-radius: 25px;
+}
+#putStick2 {
+  width: 200px;
+  height: 100px;
+  background-color: grey;
+  border-radius: 25px;
+  display: none;
+}
+#putAvia2 {
+  width: 200px;
+  height: 100px;
+  background-color: grey;
+  border-radius: 25px;
+  display: none;
+}
+#putTriple2 {
+  width: 200px;
+  height: 100px;
+  background-color: grey;
+  border-radius: 25px;
+  display: none;
+}
+#putLong2 {
+  width: 200px;
+  height: 100px;
+  background-color: grey;
+  border-radius: 25px;
+  display: none;
+}
+#putShort2 {
+  width: 200px;
+  height: 100px;
+  background-color: grey;
+  border-radius: 25px;
+  display: none;
+}
+
+#n1 {
+  left: 300px;
+  top: 54px;
+}
+#n2 {
+  left: 350px;
+  top: 83px;
+}
+#n3 {
+  left: 401px;
+  top: -61px;
+}
+#n4 {
+  left: 451px;
+  top: -32px;
+}
+#n5 {
+  left: 502px;
+  top: -177px;
+}
+#n6 {
+  left: 299px;
+  top: -61px;
+}
+#n7 {
+  left: 350px;
+  top: -32px;
+}
+#n8 {
+  left: 400px;
+  top: -177px;
+}
+#n9 {
+  left: 451px;
+  top: -148px;
+}
+#n10 {
+  left: 400px;
+  top: -119px;
+}
+#n11 {
+  left: 501px;
+  top: -175px;
+}
+#n12 {
+  left: 249px;
+  top: -494px;
+}
+#n13 {
+  top: -379px;
+  left: 249px;
+}
+#n14 {
+  top: -523px;
+  left: 198px;
+}
+#n15 {
+  left: 148px;
+  top: -494px;
+}
+#n16 {
+  left: 299px;
+  top: -465px;
+}
+#n17 {
+  left: 198px;
+  top: -523px;
+}
+#n18 {
+  left: 501px;
+  top: -754px;
+}
+#n19 {
+  left: 552px;
+  top: -898px;
+}
+#n20 {
+  left: 603px;
+  top: -1041.5px;
+}
+#n21 {
+  top: -1013px;
+  left: 653px;
+}
+#n22 {
+  left: 602px;
+  top: -985px;
+}
+#n23 {
+  left: 552px;
+  top: -955.5px;
+}
+#n24 {
+  left: 653px;
+  top: -1012px;
+}
+#n25 {
+  left: 602px;
+  top: -983px;
+}
+#n26 {
+  left: 703px;
+  top: -1040px;
+}
+#n27 {
+  left: 804px;
+  top: -1097px;
+}
+#n28 {
+  left: 704px;
+  top: -1330px;
+}
+#n29 {
+  left: 754px;
+  top: -1300px;
+}
+#n30 {
+  left: 704px;
+  top: -1619px;
+}
+#n31 {
+  left: 754px;
+  top: -1590px;
+}
+#n32 {
+  left: 805px;
+  top: -1560px;
+}
+#n33 {
+  left: 855px;
+  top: -1530px;
+}
+#n34 {
+  left: 905px;
+  top: -1500px;
+}
+#n35 {
+  left: 854px;
+  top: -1471px;
+}
+#n36 {
+  left: 753px;
+  top: -1530px;
+}
+#n37 {
+  left: 652px;
+  top: -1588px;
+}
+#n38 {
+  left: 551px;
+  top: -1646px;
+}
+#n39 {
+  left: 450px;
+  top: -1705px;
+}
+#n40 {
+  left: 349px;
+  top: -1764px;
+}
+#n41 {
+  left: 248px;
+  top: -1821px;
+}
+#n42 {
+  left: 96px;
+  top: -1966px;
+}
+#n43 {
+  left: 147px;
+  top: -1937px;
+}
+#n44 {
+  left: 955px;
+  top: -1990px;
+}
+#n45 {
+  left: 854px;
+  top: -1875px;
+}
+#n46 {
+  left: 753px;
+  top: -1933px;
+}
+#n47 {
+  left: 652px;
+  top: -1991px;
+}
+#n48 {
+  left: 551px;
+  top: -2048px;
+}
+#n49 {
+  left: 450px;
+  top: -2105px;
+}
+#n50 {
+  left: 349px;
+  top: -2163px;
+}
+#n51 {
+  left: 248px;
+  top: -2221px;
+}
+#n52 {
+  left: 905px;
+  top: -2365px;
+}
+#n53 {
+  left: 147px;
+  top: -2336px;
+}
+#n54 {
+  left: 955px;
+  top: -2394px;
+}
+#n55 {
+  left: 803.3px;
+  top: -2539px;
+}
+#n56 {
+  left: 702px;
+  top: -2597px;
+}
+#n57 {
+  left: 601px;
+  top: -2655px;
+}
+#n58 {
+  left: 500px;
+  top: -2713px;
+}
+#n59 {
+  left: 399px;
+  top: -2771px;
+}
+#n60 {
+  left: 298px;
+  top: -2829px;
+}
+#n61 {
+  left: 197px;
+  top: -2887px;
+}
+#n62 {
+  left: 96px;
+  top: -2945px;
+}
+#n63 {
+  left: 905px;
+  top: -2825px;
+}
+#n64 {
+  left: 803.3px;
+  top: -2882px;
+}
+#n65 {
+  left: 702px;
+  top: -2940px;
+}
+#n66 {
+  left: 601px;
+  top: -2998px;
+}
+#n67 {
+  left: 500px;
+  top: -3056px;
+}
+#n68 {
+  left: 399px;
+  top: -3114px;
+}
+#n69 {
+  left: 298px;
+  top: -3172px;
+}
+#n70 {
+  left: 197px;
+  top: -3230px;
+}
+#n71 {
+  left: 854px;
+  top: -3198px;
+}
+#n72 {
+  left: 753px;
+  top: -3256px;
+}
+#n73 {
+  left: 652px;
+  top: -3315px;
+}
+#n74 {
+  left: 551px;
+  top: -3374px;
+}
+#n75 {
+  left: 450px;
+  top: -3431px;
+}
+#n76 {
+  left: 349px;
+  top: -3488px;
+}
+#n77 {
+  left: 248px;
+  top: -3546px;
+}
+#n78 {
+  left: 803.3px;
+  top: -3515px;
+}
+#n79 {
+  left: 702px;
+  top: -3573px;
+}
+#n80 {
+  left: 601px;
+  top: -3632px;
+}
+#n81 {
+  left: 500px;
+  top: -3690px;
+}
+#n82 {
+  left: 399px;
+  top: -3747px;
+}
+#n83 {
+  left: 298px;
+  top: -3805px;
+}
+#n84 {
+  left: 753px;
+  top: -3775px;
+}
+#n85 {
+  left: 652px;
+  top: -3833px;
+}
+#n86 {
+  left: 551px;
+  top: -3890px;
+}
+#n87 {
+  left: 450px;
+  top: -3948px;
+}
+#n88 {
+  left: 349px;
+  top: -4006px;
+}
+#n89 {
+  left: 248px;
+  top: -4064px;
+}
+#n90 {
+  left: 197px;
+  top: -4209px;
+}
+#n91 {
+  left: 147px;
+  top: -4355px;
+}
+#n92 {
+  left: 96px;
+  top: -4500px;
+}
+#n93 {
+  left: 46px;
+  top: -4645px;
+}
+#n94 {
+  left: 1006px;
+  top: -4790px;
+}
+#n95 {
+  left: 46px;
+  top: -4938px;
+}
+#n96 {
+  left: 805px;
+  top: -5430px;
+}
+#n97 {
+  left: 855px;
+  top: -5400px;
+}
+#n98 {
+  left: 906px;
+  top: -5370px;
+}
+#n99 {
+  left: 956px;
+  top: -5340px;
+}
+#n100 {
+  left: 1006px;
+  top: -5310px;
 }
